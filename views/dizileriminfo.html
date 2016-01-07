@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <!-- Latest compiled and minified CSS -->
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+      <!-- Optional theme -->
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="/public/css/style.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+	  
+	  <title>Sezon 1 Bölüm 1</title>
+   </head>
+   <body>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="/">Sezon 1 Bölüm 1</a>
+    </div>
+    <div>
+      <ul class="nav navbar-nav">
+		<li><a href="/diziAra">Dizi Ara</a></li>
+      </ul>
+	  <ul class="nav navbar-nav navbar-right">
+		<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Kullanıcı: {{username}} <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li>
+			<a href="/cikisYap">Çıkış Yap</a>
+			</li>
+          </ul>
+        </li>
+      </ul>	
+    </div>
+  </div>
+</nav>
+	  
+      <div class="container">
+            <div class="row">
+                <div class="col-sm-10 col-sm-offset-1 form-box">
+                    <div class="form-top">
+                        <div class="form-top-left">
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th><h3><a href="/dizilerim/{{serie.imdb.id}}">{{serie.title}}</a></h3></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td><img src="{{serie.poster}}" alt="{{serie.title}}" class="img-rounded" height="280" width="200"></td>
+                                    <td>
+                                        <ul style="list-style-type:none">
+                                            <li>Yıl:</li>
+                                            <li>Çeşit:</li>
+                                            <li style="white-space: nowrap;">IMDB Puanı:</li>
+                                            <li style="white-space: nowrap;">IMDB Linki:</li>
+                                            <li>Sezonlar:</li>
+                                        </ul>
+                                    </td>
+                                    <td>
+                                        <ul style="list-style-type:none">
+                                            <li>{{serie.year.from}} - {{serie.year.to}}</li>
+                                            <li>
+                                                {% for genre in serie.genres %}
+                                                {% if loop.first %}
+                                                {{genre}}
+                                                {% else %}
+                                                , {{genre}}
+                                                {% endif %}
+                                                {% endfor %}
+                                            </li>
+                                            <li>{{serie.imdb.rating}}</li>
+                                            <li><a href="http://www.imdb.com/title/{{serie.imdb.id}}">{{serie.title}}</a></li>
+                                            <li>{% for season in seasons %}
+                                                <a href="/dizilerim/bolumler/{{serie.imdb.id}}/{{season}}">{{season}}</a>
+                                                {% endfor %}</li>
+                                        </ul>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="form-bottom">
+                        <form action="/hepsiniIzledim/{{serie.imdb.id}}/{{seasons}}" method="post">
+                            <button id="hepsiniIzledim" class="btn btn-primary">Hepsini İzledim</button>
+                        </form>
+                        <br>
+                        <form action="/dizicikar/{{serie.imdb.id}}" method="post">
+                            <button id="cikar" class="btn btn-danger">Favori Dizilerimden Çıkar</button>
+                        </form>
+                    </div>
+                    <div class="form-bottom">
+                    </div>
+                </div>
+            </div>
+      </div>
+   </body>
+</html>
