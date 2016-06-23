@@ -112,6 +112,9 @@ app.post('/signup', function (req, res) {
 	});
 	new_user.save(function (err, new_user) {
 		if (err) {
+			delete req.session.user;
+			delete req.session.email;
+			
 			res.render('kayitol', { message: "Bu kullanici adi baskasi tarafindan kullaniliyor!"});
 			console.log(req.session.user + " kullanici adi zaten kullaniliyor!")
 		}
